@@ -3,7 +3,7 @@
 //Global Variables
 int appWidth, appHeight;
 float smallerDimension, largerDimension
-Boolean widthLager=false, heightLarger=false;
+Boolean widthLarger=false, heightLarger=false;
 float imageBackgroundX, imageBackgroundY, imageBackgroundWidth, imageBackgroundHeight;
 PImage pic;
 Boolean nightMode=true;
@@ -32,6 +32,10 @@ if (widthLarger ==true  ) imageWidthRatio = largerDimension / largerDimension;
 if (widthLarger ==true ) imageHeightRatio = smallerDimension / smallerDimension;
 if (heightLarger ==true ) imageWidthRatio = smallerDimension / smallerDimension;
 if (heightLarger ==true ) imageHeightRatio = largerDimension / largerDimension;
+//
+picWidthAdjusted =appWidth * imageWidthRatio;
+picHeightAjusted =appHeight = imageHeightRatio;
+//
 //Population
 pic = loadImage("../Images used/marcus.jpg");
 imageBackgroundX = appWidth*0;
