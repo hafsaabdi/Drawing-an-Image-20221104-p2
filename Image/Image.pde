@@ -2,8 +2,9 @@
 //
 //Global Variables
 int appWidth, appHeight;
-float smallerDimension, largerDimension
+float smallerDimension, largerDimension;
 Boolean widthLarger=false, heightLarger=false;
+float imageWidthRatio=0.0, imageHeightRatio=0.0;
 float imageBackgroundX, imageBackgroundY, imageBackgroundWidth, imageBackgroundHeight;
 PImage pic;
 Boolean nightMode=true;
@@ -19,22 +20,44 @@ int picWidth = 600;
 int picHeight = 600;
 //Image Orientation: Landscape, Portrait, Square
 if ( picWidth>=picHeight ) {//True if Landscape or Square
- largerDimention = picWidth;
- smallerDimention = picHeight;
+ largerDimension = picWidth;
+ smallerDimension = picHeight;
  widthLarger = true;
 }else {//False if Portrait
- largerDimention = picHeight;
- smallerDimention = picWidth;
+ largerDimension = picHeight;
+ smallerDimension = picWidth;
  heightLarger = true;
 }
-//
-if (widthLarger ==true  ) imageWidthRatio = largerDimension / largerDimension;
-if (widthLarger ==true ) imageHeightRatio = smallerDimension / smallerDimension;
-if (heightLarger ==true ) imageWidthRatio = smallerDimension / smallerDimension;
-if (heightLarger ==true ) imageHeightRatio = largerDimension / largerDimension;
-//
+/* Older Algorithm
+if (widthLarger == true  ) imageWidthRatio = largerDimension / largerDimension;
+if (widthLarger == true )  imageHeightRatio = smallerDimension / smallerDimension;
+if (heightLarger == true ) imageWidthRatio = smallerDimension / smallerDimension;
+if (heightLarger == true ) imageHeightRatio = largerDimension / largerDimension;
+*/
+float picWidthAdjusted ,picHeightAdjusted;
+//Better Image Strech Algorithm
+if ( appWidth >=picWidth ) {
+  picWidthAdjusted = picWidth;
+  if ( widthLarger == true ) imageWidthRatio = largerDimension /smallerDimension;
+  if ( heightLarger ==true ) imageWidthRatio = smallerDimension /smallerDimension;
+} else {
+  //Image smaller than CANVAS needs seperate Algorithm
+}
+if ( appHeight >=picHeight) {
+  picHeightAdjusted = picHeight;
+  if ( widthLarger == true ) imageHeightRatio= smallerDimension /largerDimension;
+  if ( heightLarger == true ) imageHeightRatio = largerDimension /largerDimension;
+} else {
+  //Image smaller than CANVAS needs seperate Algorithm
+}
+println(appWidth, imageWidthRatio);
+println(appHeight, imageHeightRatio);
 picWidthAdjusted =appWidth * imageWidthRatio;
-picHeightAjusted =appHeight = imageHeightRatio;
+picHeightAdjusted =appHeight * imageHeightRatio;
+//
+//Developer verified variables
+println(appWidth, picWidth,picWidthAdjusted);
+println(appHeight, picHeight, picHeightAdjusted);
 //
 //Population
 pic = loadImage("../Images used/marcus.jpg");
