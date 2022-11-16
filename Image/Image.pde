@@ -3,6 +3,7 @@ int appWidth, appHeight;
 Boolean widthLarger=false, heightLarger=false;
 Boolean widthLarger2=false, heightLarger2=false;
 float picWidthAdjusted=0.0, picHeightAdjusted=0.0;
+float picWidthAdjusted2=0.0, picHeightAdjusted2=0.0;
 float backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight;
 float topHalfX,topHalfY,topHalfWidth,topHalfHeight;
 float bottomHalfX, bottomHalfY, bottomHalfWidth, bottomHalfHeight;
@@ -17,6 +18,23 @@ void setup()
    //Copy Display Oreintation
    appWidth = width;
    appHeight = height;
+   //
+   //Population
+   pic = loadImage("../Images used/Landscape/marcus.jpg");
+   pic2 = loadImage("../Images used/Landscape/anakin.jpg");
+   //pic3 = loadImage("..")
+   backgroundImageX = appWidth*0;
+   backgroundImageY = appHeight*0;
+   backgroundImageWidth = appWidth-1;
+   backgroundImageHeight = appHeight-1;
+   topHalfX=appWidth* 1/4 ;
+   topHalfY=appHeight * 1/20;
+   topHalfWidth=appWidth * 1/2;
+   topHalfHeight=appHeight * 8/20;
+   bottomHalfX=appWidth * 1/2;
+   bottomHalfY=appHeight * 3/4;
+   bottomHalfWidth=appWidth * 1/4;
+   bottomHalfHeight=appHeight * 4/20;
    //
    //Image dimensions for Aspect Ratio
    //marcus.jpg
@@ -51,6 +69,7 @@ void setup()
   }
    //
    float imageWidthRatio=0.0, imageHeightRatio=0.0;
+   float imageWidthRatio2=0.0, imageHeightRatio2=0.0;
    //Teaching example, width is known to be larger
    //Better Image Strech Algorithm, smaller image to larger CANVAS
    if ( appWidth >=picWidth ) {
@@ -73,28 +92,27 @@ void setup()
      //Image smaller than CANVAS needs separate algorithm
    }
    //
+   //Image is either larger or smaller than rect(including rect)
+   //Anakin Image:landcape into landscape
+   if (widthLarger2==true) {//Landscape or Square is TRUE
+     picWidthAdjusted2=topHalfWidth;
+     imageHeightRatio2 = smallerDimension2/ largerDimension2;
+     picHeightAdjusted2=picWidthAdjusted2 * imageHeightRatio2;
+ } else {// Portrait is TRUE, heightLarger2==true
+ 
+ }
+   //
    //Verifying Variable Values after algoroithm
    println("App Width:", appWidth, " and App Height:", appHeight);
    println("Larger Image dimension is:", largerDimension);
    println("Image dimensions are:", picWidth, picHeight);
-   println("Adjusted Image dimesnions are (stretch is goal):", picWidthAdjusted, picHeightAdjusted);
+   println("Adjusted Image dimensions are (stretch is goal):",picWidthAdjusted, picHeightAdjusted);
    //
-   //Population
-   pic = loadImage("../Images used/Landscape/marcus.jpg");
-   pic2 = loadImage("../Images used/Landscape/anakin.jpg");
-   //pic3 = loadImage("..")
-   backgroundImageX = appWidth*0;
-   backgroundImageY = appHeight*0;
-   backgroundImageWidth = appWidth-1;
-   backgroundImageHeight = appHeight-1;
-   topHalfX=appWidth* 1/4 ;
-   topHalfY=appHeight * 1/20;
-   topHalfWidth=appWidth * 1/2;
-   topHalfHeight=appHeight * 8/20;
-   bottomHalfX=appWidth * 1/2;
-   bottomHalfY=appHeight * 3/4;
-   bottomHalfWidth=appWidth * 1/4;
-   bottomHalfHeight=appHeight * 4/20;
+   println("App Width:", pic2Width, " and Image Height:", pic2Height);
+   println("Larger Image dimension is:", widthLarger2, "or",heightLarger2 );
+   println("Rectangle dimensions are:", topHalfWidth, topHalfHeight);
+   println("Scale Ratio, width;","height is",imageHeightRatio2);
+   println("Adjusted Image 2 dimensions are (stretch is goal):",picWidthAdjusted2, picHeightAdjusted2 );
    //
    //Rectangle Layout and Image drawing to CANVAS
    rect( backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight );
@@ -110,10 +128,8 @@ void setup()
  //
  void draw() 
  {
-  if (nightMode == true) {
-    tint(80, 80, 80); //RGB: Night Mode
-    image( pic, backgroundImageX, backgroundImageY, picWidthAdjusted, picHeightAdjusted);
-  }
+  image( pic2, topHalfX, topHalfY,  picWidthAdjusted2, picHeightAdjusted2 );
+  //image( pic3, bottomHalfX, bottomHalfY, bottomHalfWidth, bottomHalfHeight );
 }//End draw
 //
 void keyPressed() {
