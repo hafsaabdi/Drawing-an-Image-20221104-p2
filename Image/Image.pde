@@ -110,8 +110,10 @@ void setup()
  //
  void draw() 
  {
-   image(topHalfX,topHalfY,topHalfWidth,topHalfHeight);
-   image(bottomHalfX,bottomHalfY,bottomHalfWidth,bottomHalfHeight);
+  if (nightMode == true) {
+    tint(80, 80, 80); //RGB: Night Mode
+    image( pic, backgroundImageX, backgroundImageY, picWidthAdjusted, picHeightAdjusted);
+  }
 }//End draw
 //
 void keyPressed() {
