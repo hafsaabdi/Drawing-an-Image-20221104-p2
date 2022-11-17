@@ -68,12 +68,12 @@ void setup()
      heightLarger = true;
   }
    //
+   //Teaching example, width is known to be larger
    float imageWidthRatio=0.0, imageHeightRatio=0.0;
    float imageWidthRatio2=0.0, imageHeightRatio2=0.0;
-   //Teaching example, width is known to be larger
    //Better Image Strech Algorithm, smaller image to larger CANVAS
    if ( appWidth >=picWidth ) {
-     picWidthAdjusted = picWidth;
+     picWidthAdjusted = appWidth;
      //
      if ( widthLarger == true ) imageWidthRatio = largerDimension /smallerDimension;
      //
@@ -129,7 +129,7 @@ void setup()
  void draw() 
  {
   image( pic2, topHalfX, topHalfY,  picWidthAdjusted2, picHeightAdjusted2 );
-  //image( pic3, bottomHalfX, bottomHalfY, bottomHalfWidth, bottomHalfHeight );
+  image( pic3, bottomHalfX, bottomHalfY, picWidthAdjusted3, picHeightAdjusted3 );
 }//End draw
 //
 void keyPressed() {
