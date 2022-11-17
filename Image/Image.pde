@@ -1,11 +1,12 @@
 //Global Variables
 int appWidth, appHeight;
 float backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight;
-float picWidthAdjusted1=0.0, picHeightAdjusted1=0.0,picWidthAdjusted3=0.0;
-float picWidthAdjusted2=0.0, picHeightAdjusted2=0.0,picHeightAdjusted3=0.0;
+float picWidthAdjusted1=0.0, picHeightAdjusted1=0.0;
+float picWidthAdjusted2=0.0, picHeightAdjusted2=0.0;
+float picWidthAdjusted3=0.0,picHeightAdjusted3=0.0;
 float topHalfX,topHalfY,topHalfWidth,topHalfHeight;
 float bottomHalfX, bottomHalfY, bottomHalfWidth, bottomHalfHeight;
-PImage pic, pic2, pic3;
+PImage pic1, pic2, pic3;
 Boolean nightMode=false;
 int tintDayMode=255, tintDayModeOpacity=50;
 int tintRed=64, tintGreen=64,tintBlue=40,tintNightModeOpacity=85;
@@ -19,9 +20,9 @@ void setup()
    appHeight = height;
    //
    //Population
-   pic = loadImage("../Images used/Landscape/marcus.jpg");
+   pic1 = loadImage("../Images used/Landscape/marcus.jpg");
    pic2 = loadImage("../Images used/Landscape/anakin.jpg");
-   //pic3 = loadImage("..")
+   pic3 = loadImage("..//Images used/Portrait/castiel.jpg");
    backgroundImageX = appWidth*0;
    backgroundImageY = appHeight*0;
    backgroundImageWidth = appWidth-1;
@@ -50,6 +51,7 @@ void setup()
    float largerDimension1,largerDimension2,largerDimension3;
    float imageWidthRatio1=0.0, imageHeightRatio1=0.0;
    float imageWidthRatio2=0.0, imageHeightRatio2=0.0;
+   float imageWidthRatio3=0.0, imageHeightRatio3=0.0;
    //Image Orientation: Landscape, Portrait, Square
    //Scaling Image size with aspect ratio requires larger dimension
    if ( picWidth1>=picHeight1 ) {//True if Landscape or Square
@@ -88,61 +90,17 @@ void setup()
      largerDimension3 = picWidth3;
      smallerDimension3 = picHeight3;
      //
-     picWidthAdjusted1 = backgroundImageWidth;//from rect() layout
-     imageHeightRatio1=smallerDimension1 /largerDimension1;
-     picHeightAdjusted1=picWidthAdjusted1 * imageHeightRatio1; 
+     picWidthAdjusted3 = bottomHalfWidth;//from rect() layout
+     imageHeightRatio3=smallerDimension3 /largerDimension3;
+     picHeightAdjusted3=picWidthAdjusted3 * imageHeightRatio3; 
 }  else {//False if Portrait
-     largerDimension1 = picHeight1;
-     smallerDimension1 = picWidth1;
+     largerDimension3 = picHeight3;
+     smallerDimension3 = picWidth3;
      //
-      picHeightAdjusted1 = backgroundImageWidth;//from rect() layout
-     imageHeightRatio1=smallerDimension1 /largerDimension1;
-     picWidthAdjusted1=picHeightAdjusted1 * imageHeightRatio1;
+      picHeightAdjusted3 = bottomHalfHeight;//from rect() layout
+     imageHeightRatio3=smallerDimension3 /largerDimension3;
+     picWidthAdjusted3=picHeightAdjusted3 * imageHeightRatio3;
    }
-   //
-   //Teaching example, width is known to be larger
-   //Better Image Strech Algorithm, smaller image to larger CANVAS
-   if ( appWidth >=picWidth1 ) {
-     picWidthAdjusted1 = appWidth;
-     //
-     if ( widthLarger == true ) imageWidthRatio1 = largerDimension1 /smallerDimension1;
-     //
-     if ( appHeight >= picHeight1 ) {
-       if ( widthLarger == true ) imageHeightRatio1 = smallerDimension1 / largerDimension1;
-       picHeightAdjusted1 = picWidthAdjusted1 * imageHeightRatio1;
-       if (appHeight < picHeightAdjusted1 ) {
-         println("STOP: image is too big for CANVAS");
-         exit(); //stops any further use of APP
-         //Remember: goal is 1:1 aspect ratio
-       }
-     } else {
-       //Image smaller than CANVAS needs separate algorithm
-     }
-   } else {
-     //Image smaller than CANVAS needs separate algorithm
-   }
-   //
-   //Image is either larger or smaller than rect(including rect)
-   //Anakin Image:landcape into landscape
-   if (widthLarger2==true) {//Landscape or Square is TRUE
-     picWidthAdjusted2=topHalfWidth;
-     imageHeightRatio2 = smallerDimension2/ largerDimension2;
-     picHeightAdjusted2=picWidthAdjusted2 * imageHeightRatio2;
- } else {// Portrait is TRUE, heightLarger2==true
- 
- }
-   //
-   //Verifying Variable Values after algoroithm
-   println("App Width:", appWidth, " and App Height:", appHeight);
-   println("Larger Image dimension is:", largerDimension1);
-   println("Image dimensions are:", picWidth1, picHeight1);
-   println("Adjusted Image dimensions are (stretch is goal):",picWidthAdjusted1, picHeightAdjusted1);
-   //
-   println("App Width:", pic2Width, " and Image Height:", pic2Height);
-   println("Larger Image dimension is:", widthLarger2, "or",heightLarger2 );
-   println("Rectangle dimensions are:", topHalfWidth, topHalfHeight);
-   println("Scale Ratio, width;","height is",imageHeightRatio2);
-   println("Adjusted Image 2 dimensions are (stretch is goal):",picWidthAdjusted2, picHeightAdjusted2 );
    //
    //Rectangle Layout and Image drawing to CANVAS
    rect( backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight );
@@ -152,7 +110,7 @@ void setup()
    //Background Image must be single executed code
   if (nightMode == false) tint(tintDayMode, tintDayModeOpacity); //Gray Scale: use 1/2 tint value for white (i.e. 128/256=1/2)
   //image( pic, backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight);
-  image( pic, backgroundImageX, backgroundImageY, picWidthAdjusted1, picHeightAdjusted1);
+  image( pic1, backgroundImageX, backgroundImageY, picWidthAdjusted1, picHeightAdjusted1);
   //
  }//End setup
  //
@@ -171,13 +129,13 @@ void mousePressed() {
   if (mouseButton == LEFT) {
     nightMode = false;
     tint(tintDayMode,tintDayModeOpacity); //Gray Scale: use 1/2 tint value for white (i.e. 128/256=1/2)
-    image( pic, backgroundImageX, backgroundImageY, picWidthAdjusted1, picHeightAdjusted1);
+    image( pic1, backgroundImageX, backgroundImageY, picWidthAdjusted1, picHeightAdjusted1);
     //
   }
   if (mouseButton == RIGHT) {
     nightMode = true;
     tint(tintRed,tintGreen,tintBlue,tintNightModeOpacity); //RGB: Night Mode
-    image( pic, backgroundImageX, backgroundImageY, picWidthAdjusted2, picHeightAdjusted2);
+    image( pic2, backgroundImageX, backgroundImageY, picWidthAdjusted2, picHeightAdjusted2);
   }
 }//End mousePressed
 //
